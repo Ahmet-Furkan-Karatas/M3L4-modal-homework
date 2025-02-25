@@ -7,16 +7,19 @@ from modal import ProjectView
 # Discord izinlerini vermek 👇
 intents = discord.Intents.default()
 intents.messages = True
-intents.message_content = True
+intents.guilds = True
+intents.message_content = True 
 
-bot = commands.Bot(command_prefix="!", intents=discord.Intents.default())
+# Botun ön ekini belirler
+bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
 async def on_ready():
     print(f"{bot.user} olarak giriş yapıldı")
 
 @bot.command()
-async def start(ctx):
+async def proje(ctx):
     await ctx.send("Aşağıdaki butonları kullanarak işlemleri gerçekleştirebilirsiniz:", view=ProjectView())
 
-bot.run(TOKEN)
+if __name__ == "__main__":
+    bot.run(TOKEN)
